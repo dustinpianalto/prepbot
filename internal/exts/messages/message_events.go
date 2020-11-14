@@ -36,9 +36,15 @@ func OnMessage(s *discordgo.Session, message *discordgo.MessageCreate) {
 		return
 	}
 	defer s.WebhookDelete(webhook.ID)
+	var name string
+	if message.Member != nil && message.Member.Nick != "" {
+		name = message.Member.Nick
+	} else {
+		name = message.Author.Username
+	}
 	params := &discordgo.WebhookParams{
 		Content:   content,
-		Username:  message.Author.Username,
+		Username:  name,
 		AvatarURL: message.Author.AvatarURL(""),
 	}
 	_, err = s.WebhookExecute(webhook.ID, webhook.Token, true, params)
