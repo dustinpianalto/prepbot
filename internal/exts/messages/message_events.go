@@ -18,7 +18,7 @@ func OnMessage(s *discordgo.Session, message *discordgo.MessageCreate) {
 		return
 	}
 	content := message.Content
-	amazonRegexString := `(http|https):\/\/((?:[\w-_\.]+)amazon(?:\.[\w\-_]+)+)([\w\/\-\.,@?^=%&amp;~\+#]*[\w\-\@?^=%&amp;/~\+#])?`
+	amazonRegexString := `(http|https):\/\/((?:[\w-_\.]*)amazon(?:\.[\w\-_]+)+)([\w\/\-\.,@?^=%&amp;~\+#]*[\w\-\@?^=%&amp;/~\+#])?`
 	amazonRegex := regexp.MustCompile(amazonRegexString)
 	urls := amazonRegex.FindAllString(message.Content, -1)
 	if len(urls) == 0 {
