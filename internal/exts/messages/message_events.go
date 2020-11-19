@@ -8,10 +8,10 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-func OnMessage(s *discordgo.Session, message *discordgo.MessageCreate) {
+func CleanAmazonURLs(s *discordgo.Session, message *discordgo.MessageCreate) {
 	defer func() {
 		if r := recover(); r != nil {
-			log.Println("Recovered from panic in OnMessage")
+			log.Println("Recovered from panic in CleanAmazonURLs")
 		}
 	}()
 	if message.Author.Bot {

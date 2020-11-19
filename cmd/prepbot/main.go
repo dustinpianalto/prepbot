@@ -39,7 +39,7 @@ func main() {
 		CheckPermissions: false,
 	}
 
-	dg.AddHandler(messages.OnMessage)
+	dg.AddHandler(messages.CleanAmazonURLs)
 
 	err = dg.Open()
 	if err != nil {
