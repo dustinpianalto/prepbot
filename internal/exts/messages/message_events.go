@@ -28,6 +28,10 @@ func OnMessage(s *discordgo.Session, message *discordgo.MessageCreate) {
 		if strings.Contains(url, "ref=") || strings.Contains(url, "?") {
 			parts := strings.Split(url, "/")
 			new := strings.Join(parts[:len(parts)-1], "/")
+			if strings.Contains(new, "ref=") {
+				parts = strings.Split(new, "ref=")
+				new = parts[0]
+			}
 			content = strings.ReplaceAll(content, url, new)
 		}
 	}
