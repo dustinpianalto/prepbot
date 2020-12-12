@@ -40,7 +40,12 @@ func CleanAmazonURLs(s *discordgo.Session, message *discordgo.MessageCreate) {
 		}
 	}
 	message.Content = content
-	moveNewsLinks(s, message)
+	urlRegexString := `http[s]?:\/\/(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+`
+	urlRegex := regexp.MustCompile(urlRegexString)
+	urls = urlRegex.FindAllString(message.Content, -1)
+	if len(urls) != 0 {
+		moveNewsLinks(s, message)
+	}
 }
 
 func moveNewsLinks(s *discordgo.Session, message *discordgo.MessageCreate) {
