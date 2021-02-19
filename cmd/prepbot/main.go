@@ -8,6 +8,7 @@ import (
 
 	"github.com/bwmarrin/discordgo"
 	"github.com/dustinpianalto/disgoman"
+	"github.com/dustinpianalto/prepbot/internal/exts/members"
 	"github.com/dustinpianalto/prepbot/internal/exts/messages"
 )
 
@@ -40,6 +41,8 @@ func main() {
 	}
 
 	dg.AddHandler(messages.CleanAmazonURLs)
+	dg.AddHandler(members.OnGuildMemberAddLogging)
+	dg.AddHandler(members.OnGuildMemberRemoveLogging)
 
 	err = dg.Open()
 	if err != nil {
