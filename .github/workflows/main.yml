@@ -35,7 +35,9 @@ jobs:
         run: doctl registry login --expiry-seconds 600
 
       - name: Push image to DigitalOcean Container Registry
-        run: docker push registry.digitalocean.com/djpianalto/prepbot
+        env:
+          IMAGE_TAG: ${{ steps.get_version.outputs.version-without-v }}
+        run: docker push registry.digitalocean.com/djpianalto/prepbot:$IMAGE_TAG
 
       - name: Update deployment file
         run: TAG=${{ steps.get_version.outputs.version-without-v }} && sed -i 's|<IMAGE>|registry.digitalocean.com/djpianalto/prepbot:'${TAG}'|' $GITHUB_WORKSPACE/deployment.yml
