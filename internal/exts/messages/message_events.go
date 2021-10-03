@@ -49,8 +49,8 @@ func CleanAmazonURLs(s *discordgo.Session, message *discordgo.MessageCreate) {
 }
 
 func moveNewsLinks(s *discordgo.Session, message *discordgo.MessageCreate) {
-	linkChannel := "784855106239332352"
-	chatChannel := "777679317878177804"
+	linkChannel := os.Getenv("LINK_CHANNEL")
+	chatChannel := os.Getenv("CHAT_CHANNEL")
 	if message.ChannelID == chatChannel {
 		_, err := sendWebhook(s, message, linkChannel, message.Content)
 		if err != nil {

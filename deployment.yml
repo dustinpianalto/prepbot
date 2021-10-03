@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: prepbot
-  namespace: default
+  namespace: discord-bots
   labels:
     app: prepbot
 spec:
@@ -23,9 +23,28 @@ spec:
       containers:
         - name: prepbot
           image: <IMAGE>
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "1"
+            limits:
+              memory: "1Gi"
+              cpu: "2"
           env:
             - name: DISCORD_TOKEN
               valueFrom:
                 secretKeyRef:
                   name: prepbot
                   key: discord_token
+            - name: LINK_CHANNEL
+              valueFrom:
+                secretKeyRef:
+                  name: prepbot
+                  key: link_channel
+            - name: CHAT_CHANNEL
+              valueFrom:
+                secretKeyRef:
+                  name: prepbot
+                  key: chat_channel
+      imagePullSecrets:
+        - name: registry-2
