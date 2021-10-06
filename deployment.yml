@@ -47,4 +47,4 @@ spec:
                   name: prepbot
                   key: chat_channel
       imagePullSecrets:
-        - name: registry-2
+        - name: registry-1
